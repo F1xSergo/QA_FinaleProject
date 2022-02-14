@@ -20,15 +20,17 @@ public class CartPage {
         return this;
     }
 
+    @Step("Получить название товара из корзины")
     public String getItemNameInCart() {
         return itemNameInCart.text();
     }
 
+    @Step("Проверка, что корзина не пустая")
     public boolean checkCartIsNotEmpty() {
         return carList.should(Condition.exist).exists();
     }
 
-   // @Step(" проверка что предмет {0} в корзине")
+    @Step(" проверка что предмет {0} в корзине")
     public boolean checkItemExistInCart(String name) {
         return carList.exists() && itemList.find(Condition.text(name)).exists();
     }

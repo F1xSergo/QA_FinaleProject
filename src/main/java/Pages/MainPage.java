@@ -32,29 +32,30 @@ public class MainPage {
         sectionAll.scrollIntoView(false).click();
         return new SectionAllPage();
     }
-
+    @Step("Войти в секцию 'Monitors'")
     public MonitorsPage navigationToSectionMonitors() {
         sectionAll.scrollIntoView(false).click();
         sectionComputers.scrollIntoView(false).click();
         sectionMonitors.scrollIntoView(false).click();
         return new MonitorsPage();
     }
-
+    @Step("вводим текст - {0} в поисковике")
     public MainPage enterTextToSearchString(String text) {
         searchText.sendKeys(text, Keys.ENTER);
         return this;
     }
-
+    @Step("находим из результата поиска текст - {0}")
     public ItemPage selectItemByText(String text) {
         itemLink.find(Condition.text(text)).scrollIntoView(false).click();
         return page(ItemPage.class);
     }
-
+    @Step("проходим авторизацию")
     public LoginPage authorization() {
         sectionSigIn.shouldHave(Condition.visible).hover();
         buttonSigIn.click();
         return new LoginPage();
     }
+    @Step("Выходим из аккаунта")
     public void exitFromAccount() {
         sectionSigIn.shouldHave(Condition.visible).hover();
         exitButton.click();

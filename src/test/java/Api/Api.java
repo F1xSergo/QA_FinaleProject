@@ -31,7 +31,6 @@ public class Api {
 //                    .body("token", equalTo( "sPmMT4T9UINoqzvPErzVCArkPH-t9Q"));
         //вариант c Response
         Response response = given()
-                .header("Authorization","Bearer" + token)
                 .body(user)
                 .when()
                 .get("/api/v1/me")
