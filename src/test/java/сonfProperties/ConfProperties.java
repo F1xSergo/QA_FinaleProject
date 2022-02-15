@@ -1,4 +1,4 @@
-package ConfProperties;
+package сonfProperties;
 
 import java.io.FileInputStream;
 import java.io.IOException;

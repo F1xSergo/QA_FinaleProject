@@ -1,8 +1,8 @@
-package Ui;
+package ui;
 
 
-import Pages.CartPage;
-import Pages.MainPage;
+import pages.CartPage;
+import pages.MainPage;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Description;
 import org.junit.jupiter.api.Assertions;

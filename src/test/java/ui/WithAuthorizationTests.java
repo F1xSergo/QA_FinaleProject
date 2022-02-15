@@ -1,9 +1,9 @@
-package Ui;
+package ui;
 
-import Pages.AddressPage;
-import Pages.LoginPage;
-import Pages.MainPage;
-import ConfProperties.ConfProperties;
+import pages.AddressPage;
+import pages.LoginPage;
+import pages.MainPage;
+import сonfProperties.ConfProperties;
 import io.qameta.allure.Description;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;

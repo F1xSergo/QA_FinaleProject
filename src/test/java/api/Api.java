@@ -1,6 +1,6 @@
-package Api;
+package api;
 
-import Api.Speciaication.Specifications;
+import api.speciaication.Specifications;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
 
