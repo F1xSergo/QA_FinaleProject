@@ -20,7 +20,17 @@ public class Api {
 
         Map<String, String> user = new HashMap<>();
         user.put("client_id", "0kuG5PT7qBZg9VBpFHT1oA");
-        //user.put("redirect_uri", "https://www.reddit.com");
+        //вариант c Response
+        Response response = given()
+                .body(user)
+                .when()
+                .get("/api/v1/me")
+                .then().log().all()
+                .extract().response();
+//        JsonPath jsonPath = response.jsonPath();
+//        String owner = jsonPath.get("owner");
+//        System.out.println(owner);
+        //Assertions.assertEquals("sPmMT4T9UINoqzvPErzVCArkPH-t9Q", token);
         //вариант без Response
 //            given()
 //                    .body(user)
@@ -29,18 +39,6 @@ public class Api {
 //                    .then().log().all();
 //                    .body("id",  equalTo(4))
 //                    .body("token", equalTo( "sPmMT4T9UINoqzvPErzVCArkPH-t9Q"));
-        //вариант c Response
-        Response response = given()
-                .body(user)
-                .when()
-                .get("/api/v1/me")
-                //.post("/api/v1/access_token")
-                .then().log().all()
-                .extract().response();
-//        JsonPath jsonPath = response.jsonPath();
-//        String owner = jsonPath.get("owner");
-//        System.out.println(owner);
-        //Assertions.assertEquals("sPmMT4T9UINoqzvPErzVCArkPH-t9Q", token);
     }
 
     @Test
@@ -56,15 +54,7 @@ public class Api {
         user.put("client_secret", "sPmMT4T9UINoqzvPErzVCArkPH-t9Q");
         user.put("grant_type", "authorization_code&code=CODE&redirect_uri='https://www.reddit.com'");
 
-        //вариант без Response
-//            given()
-//                    .body(user)
-//                    .when()
-//                    .post("/api/v1/me")
-//                    .then().log().all();
-//                    .body("id",  equalTo(4))
-//                    .body("token", equalTo( "sPmMT4T9UINoqzvPErzVCArkPH-t9Q"));
-        //вариант c Response
+
         Response response = given()
                 .body(user)
                 .when()
