@@ -19,8 +19,7 @@ public class AddressPage {
     private final SelenideElement addCity = $x("//input[@type='text'][@id='address-ui-widgets-enterAddressCity']");
     private final SelenideElement addZipCode = $x("//input[@type='text'][@id='address-ui-widgets-enterAddressPostalCode']");
     private final SelenideElement addPhoneNumber = $x("//input[@type='text'][@id='address-ui-widgets-enterAddressPhoneNumber']");
-    private final SelenideElement buttonAddAddress = $x("//input[@class='a-button-input']");
-
+    private final SelenideElement buttonAddAddress = $x("//input[@class='a-button-input'][@aria-labelledby='address-ui-widgets-form-submit-button-announce']");
     private final SelenideElement bannerAddress = $x("//h4[@class='a-alert-heading']");
 
     @Step("переход в секцию 'Address'")
@@ -55,7 +54,7 @@ public class AddressPage {
         addCity.setValue(city);
         addZipCode.setValue(index);
         addPhoneNumber.setValue(number);
-
+        Thread.sleep(500);
         buttonAddAddress.click();
         return this;
     }

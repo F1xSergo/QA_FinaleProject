@@ -55,7 +55,6 @@ public class SiteOperationsTests extends MainTest {
                 .openCart();
 
         String actualNameInCart = cart.getItemNameInCart();
-//        Assertions.assertEquals(expectedNameInCart, actualNameInCart);
 
         assertAll(
                 //проверка что в корзине не пусто

@@ -2,7 +2,10 @@ package api;
 
 import api.speciaication.Specifications;
 import io.restassured.response.Response;
+import org.apache.hc.client5.http.auth.CredentialsProvider;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.virtualauthenticator.Credential;
+import сonfProperties.ConfProperties;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,60 +14,31 @@ import static io.restassured.RestAssured.given;
 
 public class Api {
     private final static String URL = "https://www.reddit.com";
+    private final static String OAUTH_URL = "https://oauth.reddit.com";
+    private final static String USER_NAME = "F1x_Sergo";
+    private final static String PASSWORD = ConfProperties.getProperty("passwordAPI");
+    private final static String CLIENT_ID = "0kuG5PT7qBZg9VBpFHT1oA";
+    private final static String SECRET_KEY = ConfProperties.getProperty("secret_Key");
+
 
     @Test
-    public void successUserIdentity() {
+    public void getAccessToken() {
         Specifications.instalSpecification(Specifications.requestSpec(URL), Specifications.responseSpecUnique(200));
-        String token = "sPmMT4T9UINoqzvPErzVCArkPH-t9Q";
-//0kuG5PT7qBZg9VBpFHT1oA
 
+        Map<String, String> auth = new HashMap<>();
+        auth.put(CLIENT_ID, SECRET_KEY);
         Map<String, String> user = new HashMap<>();
-        user.put("client_id", "0kuG5PT7qBZg9VBpFHT1oA");
-        //вариант c Response
-        Response response = given()
+        user.put("grant_type", "password");
+        user.put("username", USER_NAME);
+        user.put("password", PASSWORD);
+
+        given()
+                .header(CLIENT_ID, SECRET_KEY)
                 .body(user)
                 .when()
+                //.post("/api/v1/access_token")
                 .get("/api/v1/me")
                 .then().log().all()
                 .extract().response();
-//        JsonPath jsonPath = response.jsonPath();
-//        String owner = jsonPath.get("owner");
-//        System.out.println(owner);
-        //Assertions.assertEquals("sPmMT4T9UINoqzvPErzVCArkPH-t9Q", token);
-        //вариант без Response
-//            given()
-//                    .body(user)
-//                    .when()
-//                    .post("/api/v1/me")
-//                    .then().log().all();
-//                    .body("id",  equalTo(4))
-//                    .body("token", equalTo( "sPmMT4T9UINoqzvPErzVCArkPH-t9Q"));
-    }
-
-    @Test
-    public void getAuthorizationUser() {
-        Specifications.instalSpecification(Specifications.requestSpec(URL), Specifications.responseSpecUnique(200));
-//0kuG5PT7qBZg9VBpFHT1oA
-
-        Map<String, String> user = new HashMap<>();
-        user.put("client_id", "0kuG5PT7qBZg9VBpFHT1oA");
-        user.put("response_type", "code");
-        user.put("redirect_uri", "https://www.reddit.com/prefs/apps");
-
-        user.put("client_secret", "sPmMT4T9UINoqzvPErzVCArkPH-t9Q");
-        user.put("grant_type", "authorization_code&code=CODE&redirect_uri='https://www.reddit.com'");
-
-
-        Response response = given()
-                .body(user)
-                .when()
-                .post("/api/v1/authorize.compact?")
-                //.post("/api/v1/access_token")
-                .then().log().all()
-                .extract().response();
-//        JsonPath jsonPath = response.jsonPath();
-//        String token = jsonPath.get("access_token");
-//        System.out.println(token);
-        //Assertions.assertEquals("sPmMT4T9UINoqzvPErzVCArkPH-t9Q", token);
     }
 }

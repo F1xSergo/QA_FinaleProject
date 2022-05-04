@@ -64,7 +64,6 @@ public class WithAuthorizationTests extends MainTest {
                 .goToAddressForm()
                 .addAddressButton()
                 .enterAddressDetails("Sergey", "Platonova", "Minsk", "220005", "375298003301");
-
         String actualCheckAddressSaveBanner = addressPage.checkAddressSave();
 
         Assertions.assertEquals("Address saved", actualCheckAddressSaveBanner);
